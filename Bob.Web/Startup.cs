@@ -32,6 +32,7 @@ namespace Bob.Web
             SD.ProductApiBase = Configuration["ServicesUrls:ProductAPI"];
             SD.ShoppingCartApiBase = Configuration["ServicesUrls:ShoppingCartAPI"];
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddControllersWithViews();
 
             services.AddAuthentication(options =>

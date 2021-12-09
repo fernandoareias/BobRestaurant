@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6466f03f-0155-4286-a3d8-0272aef2b9a2": {
+      "ProjectGuid": "6466f03f-0155-4286-a3d8-0272aef2b9a2",
+      "DisplayName": "Bob.Services.ShopCartAPI",
+      "ColorIndex": 0
+    },
+    "b639dfb8-afe0-4588-9562-048d55496eb0": {
+      "ProjectGuid": "b639dfb8-afe0-4588-9562-048d55496eb0",
+      "DisplayName": "Bob.Web",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
