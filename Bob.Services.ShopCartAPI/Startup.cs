@@ -35,8 +35,14 @@ namespace Bob.Services.ShopCartAPI
 
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
+            //services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+            //services.AddSingleton<IRabbitMQCartMessageSender, RabbitMQCartMessageSender>();
+            services.AddControllers();
+            services.AddHttpClient<ICouponRepository, CouponRepository>(u => u.BaseAddress =
+              new Uri(Configuration["ServiceUrls:CouponAPI"]));
 
             services.AddControllers();
 

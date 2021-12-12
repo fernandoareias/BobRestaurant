@@ -30,12 +30,12 @@ namespace Bob.Web.Controllers
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            //var response = await _cartService.ApplyCoupon<ResponseDto>(cartDto, accessToken);
+            var response = await _cartService.ApplyCoupon<ResponseDto>(cartDto, accessToken);
 
-            //if (response != null && response.IsSuccess)
-            //{
-            //    return RedirectToAction(nameof(CartIndex));
-            //}
+            if (response != null && response.IsSucess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
             return View();
         }
 
@@ -45,12 +45,12 @@ namespace Bob.Web.Controllers
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            //var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
+            var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId.ToString(), accessToken);
 
-            //if (response != null && response.IsSuccess)
-            //{
-            //    return RedirectToAction(nameof(CartIndex));
-            //}
+            if (response != null && response.IsSucess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
             return View();
         }
 
@@ -58,13 +58,13 @@ namespace Bob.Web.Controllers
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            //var response = await _cartService.RemoveFromCartAsync<ResponseDto>(cartDetailsId, accessToken);
+            var response = await _cartService.RemoveCartAsync<ResponseDto>(cartDetailsId, accessToken);
 
 
-            //if (response != null && response.IsSuccess)
-            //{
-            //    return RedirectToAction(nameof(CartIndex));
-            //}
+            if (response != null && response.IsSucess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace Bob.Web.Controllers
             try
             {
                 var accessToken = await HttpContext.GetTokenAsync("access_token");
-                var response = new ResponseDto();//_cartService.Checkout<ResponseDto>(cartDto.CartHeader, accessToken);
+                var response = await _cartService.Checkout<ResponseDto>(cartDto.CartHeader, accessToken);
                 if (!response.IsSucess)
                 {
                     TempData["Error"] = response.Errors;

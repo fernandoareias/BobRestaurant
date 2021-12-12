@@ -19,6 +19,8 @@ namespace Bob.Services.ShopCartAPI.Repositories
             _mapper = mapper;
         }
 
+       
+
         public async Task<bool> ClearCart(string userId)
         {
             var cartHeaderFromDb = await _context.CartHeader.FirstOrDefaultAsync(u => u.Id == int.Parse(userId));
@@ -123,5 +125,49 @@ namespace Bob.Services.ShopCartAPI.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> ApplyCoupon(string userId, string couponCode)
+        {
+            try
+            {
+                var cartFromDb = await _context.CartHeader.FirstOrDefaultAsync(u => u.UserId == int.Parse(userId));
+
+                if (cartFromDb == null) 
+                    return false;
+                
+                cartFromDb.CouponCode = couponCode;
+                _context.CartHeader.Update(cartFromDb);
+                await _context.SaveChangesAsync();
+                
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public async Task<bool> RemoveCoupon(string userId)
+        {
+            try
+            {
+                var cartFromDb = await _context.CartHeader.FirstOrDefaultAsync(u => u.UserId == int.Parse(userId));
+
+                if (cartFromDb == null)
+                    return false;
+
+                cartFromDb.CouponCode = "";
+                _context.CartHeader.Update(cartFromDb);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }

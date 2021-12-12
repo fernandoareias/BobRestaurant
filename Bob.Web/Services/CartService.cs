@@ -24,6 +24,29 @@ namespace Bob.Web.Services
             });
         }
 
+        public async Task<T> ApplyCoupon<T>(CartDto cartDto, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                apiType = SD.ApiType.POST,
+                Data = cartDto,
+                Url = SD.ShoppingCartApiBase + "/api/cart/ApplyCoupon",
+                AccessToken = token
+            });
+        }
+
+
+        public async Task<T> RemoveCoupon<T>(string userId, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                apiType = SD.ApiType.POST,
+                Data = userId,
+                Url = SD.ShoppingCartApiBase + "/api/cart/RemoveCoupon",
+                AccessToken = token
+            });
+        }
+
         public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
@@ -53,6 +76,17 @@ namespace Bob.Web.Services
                 apiType = SD.ApiType.POST,
                 Data = cart,
                 Url = SD.ShoppingCartApiBase + "api/cart/UpdateCart",
+                AccessToken = token
+            });
+        }
+
+        public async Task<T> Checkout<T>(CartHeaderDto cartHeader, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                apiType = SD.ApiType.POST,
+                Data = cartHeader,
+                Url = SD.ShoppingCartApiBase + "/api/cart/checkout",
                 AccessToken = token
             });
         }
