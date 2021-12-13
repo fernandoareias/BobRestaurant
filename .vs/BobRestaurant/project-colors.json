@@ -25,7 +25,17 @@
       "ProjectGuid": "f2c6122a-b445-48c0-9217-995e25030125",
       "DisplayName": "Bob.Services.CouponAPI",
       "ColorIndex": 3
+    },
+    "016d6628-20be-423c-be0e-bd18908dfc93": {
+      "ProjectGuid": "016d6628-20be-423c-be0e-bd18908dfc93",
+      "DisplayName": "Bob.Messaging",
+      "ColorIndex": 4
+    },
+    "e20eae74-d43f-4298-9ebe-2ce01405f231": {
+      "ProjectGuid": "e20eae74-d43f-4298-9ebe-2ce01405f231",
+      "DisplayName": "Bob.Services.OrderAPI",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 6
 }
