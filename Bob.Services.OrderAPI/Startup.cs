@@ -1,4 +1,5 @@
 using AutoMapper;
+using Bob.Services.OrderAPI.Repositories;
 using Manage.Services.OrderAPI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,7 +37,10 @@ namespace Bob.Services.OrderAPI
             //IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             //services.AddSingleton(mapper);
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.AddScoped<ICouponRepository, CouponRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddControllers();
 
